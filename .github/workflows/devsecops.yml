@@ -27,7 +27,7 @@ jobs:
           SONAR_HOST_URL: https://sonarcloud.io
 
       - name: Snyk (SCA/SAST)
-        uses: snyk/actions/node@master
+        uses: snyk/actions/php@master
         continue-on-error: true      # gate informativo; pon 'false' para bloquear
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
