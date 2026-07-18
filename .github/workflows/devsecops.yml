@@ -41,12 +41,18 @@ jobs:
           sarif_file: snyk.sarif
 
       - name: Qwiet preZero (SAST)
+        uses: elangosenthilnathan/Qwiet-preZero@v0.0.2
         continue-on-error: true
         env:
           SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-        run: |
-          curl -s https://cdn.shiftleft.io/download/sl > sl && chmod +x sl
-          ./sl analyze --app DVWA-${{ github.actor }} --tag branch=main --php .
+        with:
+          shiftleft-access-token: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+          importGitHub: true
+          verbose: true
+          strict: true
+#        run: |
+#          curl -s https://cdn.shiftleft.io/download/sl > sl && chmod +x sl
+#          ./sl analyze --app DVWA-${{ github.actor }} --tag branch=main --php .
 
   # ---------- 2. IaC / Dockerfile ----------
   iac-scan:
