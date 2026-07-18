@@ -66,6 +66,10 @@ jobs:
           framework: dockerfile,secrets
           soft_fail: true            # informativo; quítalo para que sea gate estricto
 
+      - name: Upload Snyk result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
   # ---------- 3. Build + escaneo de imagen + push ----------
   build-scan-push:
     needs: [ sast-sca, iac-scan ]
