@@ -20,6 +20,9 @@ jobs:
 
       - name: SonarCloud (SAST)
         uses: sonarsource/sonarqube-scan-action@v6
+        with:
+            args: >
+              -Dsonar.verbose=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
