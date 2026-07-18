@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0     # SonarCloud necesita el historial completo
 
       - name: SonarCloud (SAST)
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: sonarsource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
