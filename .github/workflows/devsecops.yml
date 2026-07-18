@@ -91,8 +91,16 @@ jobs:
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ secrets.ACR_LOGIN_SERVER }}/dvwa:${{ github.sha }}
+          format: sarif
+          output: trivy-results.sarif
           severity: CRITICAL,HIGH
           exit-code: '0'             # informativo; '1' para bloquear con CRITICAL/HIGH
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() # Ensures results are uploaded even if vulnerabilities are found
+        with:
+          sarif_file: trivy-results.sarif
 
       - name: Publicar la imagen en el ACR
         run: docker push ${{ secrets.ACR_LOGIN_SERVER }}/dvwa:${{ github.sha }}
