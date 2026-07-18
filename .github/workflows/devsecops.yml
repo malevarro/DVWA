@@ -20,9 +20,6 @@ jobs:
 
       - name: SonarCloud (SAST)
         uses: sonarsource/sonarqube-scan-action@v6
-        with:
-            args: >
-              -Dsonar.verbose=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
@@ -73,7 +70,7 @@ jobs:
         run: docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/dvwa:${{ github.sha }} .
 
       - name: Trivy (escaneo de la imagen)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ secrets.ACR_LOGIN_SERVER }}/dvwa:${{ github.sha }}
           severity: CRITICAL,HIGH
