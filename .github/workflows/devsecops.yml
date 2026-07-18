@@ -66,7 +66,7 @@ jobs:
           framework: dockerfile,secrets
           soft_fail: true            # informativo; quítalo para que sea gate estricto
 
-      - name: Upload Snyk result to GitHub Code Scanning
+      - name: Upload Checkov result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: results.sarif
